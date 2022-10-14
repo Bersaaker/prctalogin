@@ -14,11 +14,25 @@ function login(e){
     let passwordVal = password.value;
 
     if(usuarioVal == '' || passwordVal == ''){
+        creaMensaje('Verifica tus campos', 'danger');
         return;
     }
 
-    console.log('el valor para user es: ' + usuarioVal);
-    console.log('el valor para pass es: ' + passwordVal);
+    if(localStorage.getItem('usuario')){
+        let objeto = JSON.parse(localStorage.getItem('usuario'));
+
+        if( usuarioVal == objeto.user && passwordVal == objeto.pass){
+            creaMensaje('Login Correcto', 'success');
+            localStorage.setItem('sesion', 'activa');
+            setTimeout(function(){
+                window.open('./inicio.html', '_self');
+            }, 2000)
+        }else{
+            creaMensaje('Usuario incorrecto', 'danger');
+        }
+    }else{
+        creaMensaje('No hay registros', 'danger');
+    }
 
     
 }

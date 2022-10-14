@@ -13,6 +13,25 @@
         <div class="jumbotron">
             <h1>Bienvenidos a mi Aplicacion</h1>
         </div>
+        <div id="salir">
+            <button class="btn btn-outline-danger" id="btnSalir">Salir</button>
+        </div>
     </div>
+    <script>
+
+        window.addEventListener('load', function(){
+            if(localStorage.getItem('sesion')==null){
+                window.location.replace('./index.html','_self');
+            }
+        })
+
+        const boton = document.getElementById('btnSalir');
+
+        boton.addEventListener('click', function(e){
+            e.preventDefault();
+            localStorage.removeItem('sesion');
+            window.open('./index.html','_self')
+        });
+    </script>
 </body>
 </html>
